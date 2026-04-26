@@ -878,7 +878,7 @@ if (activeSection === "portfolio") {
       </a>
 
       <a
-        href="https://wa.me/2347034828731"
+        href="https://wa.me/2349079468332"
         target="_blank"
         rel="noreferrer"
         style={{ textDecoration: "none" }}
