@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  background: #050505;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes fadePage {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatGlow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050505;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6b5a00, gold, #6b5a00);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8a7300, #ffd700, #8a7300);
+}
+
+/* Text highlight */
+::selection {
+  background: rgba(255, 215, 0, 0.28);
+  color: white;
+}
+
+/* Soft ambient page glow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,215,0,0.035), transparent 28%),
+    radial-gradient(circle at 80% 30%, rgba(255,215,0,0.025), transparent 26%),
+    radial-gradient(circle at 50% 80%, rgba(255,215,0,0.02), transparent 24%);
+  z-index: 0;
+}
