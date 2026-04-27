@@ -487,7 +487,7 @@ if (activeSection === "about") {
     );
   }
 
-  /* PORTFOLIO */
+  /* PREMIUM PORTFOLIO SECTION (Desktop + Tablet + Mobile Responsive) */
 if (activeSection === "portfolio") {
   const portfolioItems = [
     /* DASHBOARDS */
@@ -495,80 +495,38 @@ if (activeSection === "portfolio") {
       title: "Sales Dashboard",
       category: "Dashboards",
       image: "/dashboards/sales.png",
-      desc: "Revenue trends and KPIs.",
+      desc: "Revenue trends, conversion metrics and executive KPIs.",
       link: "/dashboards/sales.png",
     },
     {
       title: "Finance Dashboard",
       category: "Dashboards",
       image: "/dashboards/finance.png",
-      desc: "Profitability and budgets.",
+      desc: "Profitability, budgets and forecasting intelligence.",
       link: "/dashboards/finance.png",
     },
     {
       title: "HR Dashboard",
       category: "Dashboards",
       image: "/dashboards/hr.png",
-      desc: "Retention and hiring metrics.",
+      desc: "Retention, workforce and hiring analytics.",
       link: "/dashboards/hr.png",
     },
-    {
-      title: "Marketing Dashboard",
-      category: "Dashboards",
-      image: "/dashboards/marketing.png",
-      desc: "ROI and campaign analytics.",
-      link: "/dashboards/marketing.png",
-    },
 
-    /* GRAPHIC DESIGN */
-    {
-      title: "Business Flyer",
-      category: "Graphic Design",
-      image: "/graphics/business-flyer.png",
-      desc: "Luxury business flyer design.",
-      link: "/graphics/business-flyer.png",
-    },
+    /* GRAPHICS */
     {
       title: "Corporate Flyer",
       category: "Graphic Design",
       image: "/graphics/corporate-flyer.png",
-      desc: "Corporate campaign visuals.",
+      desc: "Premium marketing visuals for campaigns.",
       link: "/graphics/corporate-flyer.png",
-    },
-    {
-      title: "Crypto Promo",
-      category: "Graphic Design",
-      image: "/graphics/crypto-promo-flyer.png",
-      desc: "Fintech luxury advert.",
-      link: "/graphics/crypto-promo-flyer.png",
-    },
-    {
-      title: "Fashion Banner",
-      category: "Graphic Design",
-      image: "/graphics/fashion-banner.png",
-      desc: "Premium fashion promo.",
-      link: "/graphics/fashion-banner.png",
     },
     {
       title: "Luxury Ads",
       category: "Graphic Design",
       image: "/graphics/luxury-social-ads.png",
-      desc: "Social ad creatives.",
+      desc: "High-converting paid ad creatives.",
       link: "/graphics/luxury-social-ads.png",
-    },
-    {
-      title: "Real Estate Poster",
-      category: "Graphic Design",
-      image: "/graphics/real-estate-poster.png",
-      desc: "Property campaign visual.",
-      link: "/graphics/real-estate-poster.png",
-    },
-    {
-      title: "Restaurant Flyer",
-      category: "Graphic Design",
-      image: "/graphics/restaurant-flyer.png",
-      desc: "Food brand flyer.",
-      link: "/graphics/restaurant-flyer.png",
     },
 
     /* BRANDING */
@@ -576,22 +534,15 @@ if (activeSection === "portfolio") {
       title: "SAGE Analytics",
       category: "Branding",
       image: "/branding/sage-branding.png",
-      desc: "Luxury analytics identity.",
+      desc: "Luxury identity system for analytics brand.",
       link: "/branding/sage-branding.png",
     },
     {
       title: "Luxora Collection",
       category: "Branding",
       image: "/branding/luxury-logo-system.png",
-      desc: "Fashion logo identity.",
+      desc: "Elegant fashion logo system.",
       link: "/branding/luxury-logo-system.png",
-    },
-    {
-      title: "Wennys Kitchen",
-      category: "Branding",
-      image: "/branding/restaurant-brand-identity.png",
-      desc: "Restaurant logo identity.",
-      link: "/branding/restaurant-brand-identity.png",
     },
   ];
 
@@ -602,24 +553,80 @@ if (activeSection === "portfolio") {
           (item) => item.category === portfolioTab
         );
 
+  const isMobile = window.innerWidth < 768;
+  const isTablet =
+    window.innerWidth >= 768 &&
+    window.innerWidth < 1024;
+
   return (
-    <div style={pageStyle}>
+    <div
+      style={{
+        padding: isMobile
+          ? "30px 16px"
+          : isTablet
+          ? "40px 28px"
+          : "60px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "32px",
+      }}
+    >
       {/* HERO */}
-      <div style={eliteCardLarge}>
-        <h1 style={eliteHeading}>Portfolio</h1>
+      <div
+        style={{
+          background:
+            "linear-gradient(145deg,#0b0b0b,#111)",
+          border:
+            "1px solid rgba(255,255,255,0.05)",
+          borderRadius: "28px",
+          padding: isMobile
+            ? "32px 20px"
+            : "55px 40px",
+          textAlign: "center",
+        }}
+      >
+        <p
+          style={{
+            color: "#D4AF37",
+            fontSize: "13px",
+            letterSpacing: "3px",
+            fontWeight: "700",
+            marginBottom: "14px",
+          }}
+        >
+          SELECTED WORK
+        </p>
+
+        <h1
+          style={{
+            color: "#fff",
+            fontSize: isMobile
+              ? "38px"
+              : isTablet
+              ? "56px"
+              : "76px",
+            lineHeight: "1",
+            fontWeight: "900",
+            marginBottom: "18px",
+          }}
+        >
+          Premium Portfolio
+        </h1>
 
         <p
           style={{
-            ...bodyText,
-            textAlign: "center",
-            maxWidth: "900px",
+            color: "#9e9e9e",
+            maxWidth: "780px",
             margin: "0 auto",
-            fontSize: "22px",
+            fontSize: isMobile
+              ? "16px"
+              : "20px",
+            lineHeight: "1.7",
           }}
         >
-          Premium dashboards, visual systems,
-          brand identities and assets designed
-          to grow businesses.
+          Dashboards, branding systems and
+          strategic visuals designed to help
+          businesses scale with clarity.
         </p>
       </div>
 
@@ -627,8 +634,9 @@ if (activeSection === "portfolio") {
       <div
         style={{
           display: "flex",
-          gap: "14px",
           flexWrap: "wrap",
+          gap: "12px",
+          justifyContent: "center",
         }}
       >
         {[
@@ -641,22 +649,25 @@ if (activeSection === "portfolio") {
             key={tab}
             onClick={() => setPortfolioTab(tab)}
             style={{
-              padding: "14px 24px",
-              borderRadius: "40px",
+              padding: isMobile
+                ? "12px 18px"
+                : "14px 24px",
+              borderRadius: "50px",
               border:
                 portfolioTab === tab
-                  ? "1px solid #ffd700"
-                  : "1px solid rgba(255,215,0,0.08)",
+                  ? "1px solid #D4AF37"
+                  : "1px solid rgba(255,255,255,0.08)",
               background:
                 portfolioTab === tab
-                  ? "linear-gradient(135deg,#2a2500,#111)"
-                  : "#0d0d0d",
+                  ? "#151515"
+                  : "#0c0c0c",
               color:
                 portfolioTab === tab
-                  ? "#ffd700"
+                  ? "#D4AF37"
                   : "#fff",
-              fontWeight: "800",
+              fontWeight: "700",
               cursor: "pointer",
+              transition: "0.3s ease",
             }}
           >
             {tab}
@@ -668,9 +679,12 @@ if (activeSection === "portfolio") {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit,minmax(320px,1fr))",
-          gap: "26px",
+          gridTemplateColumns: isMobile
+            ? "1fr"
+            : isTablet
+            ? "repeat(2,1fr)"
+            : "repeat(3,1fr)",
+          gap: "24px",
         }}
       >
         {filtered.map((item, index) => (
@@ -685,103 +699,54 @@ if (activeSection === "portfolio") {
           >
             <div
               style={{
-                ...eliteCard,
-                padding: 0,
+                background:
+                  "linear-gradient(145deg,#0d0d0d,#141414)",
+                border:
+                  "1px solid rgba(255,255,255,0.05)",
+                borderRadius: "24px",
                 overflow: "hidden",
+                transition: "0.35s ease",
                 cursor: "pointer",
               }}
               onMouseEnter={(e) => {
-                const img =
-                  e.currentTarget.querySelector("img");
-                const overlay =
-                  e.currentTarget.querySelector(
-                    ".overlay"
-                  );
-
-                img.style.transform = "scale(1.06)";
-                overlay.style.opacity = "1";
-
                 e.currentTarget.style.transform =
                   "translateY(-8px)";
+                e.currentTarget.style.boxShadow =
+                  "0 20px 50px rgba(0,0,0,0.35)";
               }}
               onMouseLeave={(e) => {
-                const img =
-                  e.currentTarget.querySelector("img");
-                const overlay =
-                  e.currentTarget.querySelector(
-                    ".overlay"
-                  );
-
-                img.style.transform = "scale(1)";
-                overlay.style.opacity = "0";
-
                 e.currentTarget.style.transform =
                   "translateY(0px)";
+                e.currentTarget.style.boxShadow =
+                  "none";
               }}
             >
               {/* IMAGE */}
-              <div
+              <img
+                src={item.image}
+                alt={item.title}
                 style={{
-                  position: "relative",
-                  overflow: "hidden",
+                  width: "100%",
+                  height: isMobile
+                    ? "220px"
+                    : "260px",
+                  objectFit: "cover",
                 }}
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  style={{
-                    width: "100%",
-                    height: "300px",
-                    objectFit: "cover",
-                    transition: "0.45s ease",
-                  }}
-                />
-
-                {/* EYE OVERLAY */}
-                <div
-                  className="overlay"
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "rgba(0,0,0,0.55)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    opacity: 0,
-                    transition: "0.35s ease",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "70px",
-                      height: "70px",
-                      borderRadius: "50%",
-                      background:
-                        "rgba(255,215,0,0.95)",
-                      color: "#000",
-                      fontSize: "34px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: "900",
-                      boxShadow:
-                        "0 0 25px rgba(255,215,0,0.35)",
-                    }}
-                  >
-                    👁
-                  </div>
-                </div>
-              </div>
+              />
 
               {/* CONTENT */}
-              <div style={{ padding: "24px" }}>
+              <div
+                style={{
+                  padding: "24px",
+                }}
+              >
                 <p
                   style={{
-                    color: "#ffd700",
-                    fontSize: "13px",
-                    fontWeight: "800",
+                    color: "#D4AF37",
+                    fontSize: "12px",
+                    letterSpacing: "2px",
                     marginBottom: "10px",
+                    fontWeight: "700",
                   }}
                 >
                   {item.category}
@@ -790,14 +755,21 @@ if (activeSection === "portfolio") {
                 <h3
                   style={{
                     color: "#fff",
-                    fontSize: "28px",
-                    marginBottom: "12px",
+                    fontSize: "26px",
+                    marginBottom: "10px",
+                    fontWeight: "800",
                   }}
                 >
                   {item.title}
                 </h3>
 
-                <p style={bodyText}>
+                <p
+                  style={{
+                    color: "#9e9e9e",
+                    lineHeight: "1.7",
+                    fontSize: "15px",
+                  }}
+                >
                   {item.desc}
                 </p>
               </div>
