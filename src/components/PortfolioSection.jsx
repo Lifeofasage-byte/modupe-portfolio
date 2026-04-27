@@ -4,7 +4,6 @@ function PortfolioSection() {
   const [portfolioTab, setPortfolioTab] = useState("All");
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  /* LIVE RESPONSIVE WIDTH */
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
@@ -43,8 +42,15 @@ function PortfolioSection() {
       desc: "Retention, workforce and hiring analytics.",
       link: "/dashboards/hr.png",
     },
+    {
+      title: "Marketing Dashboard",
+      category: "Dashboards",
+      image: "/dashboards/marketing.png",
+      desc: "Campaign ROI, lead funnels and growth performance.",
+      link: "/dashboards/marketing.png",
+    },
 
-    /* GRAPHICS */
+    /* GRAPHIC DESIGN */
     {
       title: "Corporate Flyer",
       category: "Graphic Design",
@@ -58,6 +64,41 @@ function PortfolioSection() {
       image: "/graphics/luxury-social-ads.png",
       desc: "High-converting paid ad creatives.",
       link: "/graphics/luxury-social-ads.png",
+    },
+    {
+      title: "Business Flyer",
+      category: "Graphic Design",
+      image: "/graphics/business-flyer.png",
+      desc: "Modern business promo flyer design.",
+      link: "/graphics/business-flyer.png",
+    },
+    {
+      title: "Crypto Promo Flyer",
+      category: "Graphic Design",
+      image: "/graphics/crypto-promo-flyer.png",
+      desc: "Bold campaign visual for crypto promotions.",
+      link: "/graphics/crypto-promo-flyer.png",
+    },
+    {
+      title: "Fashion Banner",
+      category: "Graphic Design",
+      image: "/graphics/fashion-banner.png",
+      desc: "Luxury fashion campaign creative.",
+      link: "/graphics/fashion-banner.png",
+    },
+    {
+      title: "Real Estate Poster",
+      category: "Graphic Design",
+      image: "/graphics/real-estate-poster.png",
+      desc: "Premium property marketing design.",
+      link: "/graphics/real-estate-poster.png",
+    },
+    {
+      title: "Restaurant Flyer",
+      category: "Graphic Design",
+      image: "/graphics/restaurant-flyer.png",
+      desc: "Bold restaurant menu promotion visual.",
+      link: "/graphics/restaurant-flyer.png",
     },
 
     /* BRANDING */
@@ -74,6 +115,13 @@ function PortfolioSection() {
       image: "/branding/luxury-logo-system.png",
       desc: "Elegant fashion logo system.",
       link: "/branding/luxury-logo-system.png",
+    },
+    {
+      title: "Wennys Kitchen",
+      category: "Branding",
+      image: "/branding/restaurant-brand-identity.png",
+      desc: "Premium restaurant branding identity.",
+      link: "/branding/restaurant-brand-identity.png",
     },
   ];
 
