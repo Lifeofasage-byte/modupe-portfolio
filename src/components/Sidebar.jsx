@@ -1,6 +1,7 @@
 import React from "react";
 import { goldBtn } from "../styles";
 
+
 function Sidebar({ timeNow }) {
   const infoItems = [
     ["EMAIL", "hiremodupe@gmail.com", "✉"],
@@ -73,7 +74,7 @@ function Sidebar({ timeNow }) {
             fontWeight: "600",
           }}
         >
-          Data & BI Consultant
+          Business Intelligence Strategist
         </p>
       </div>
 
@@ -154,23 +155,45 @@ function Sidebar({ timeNow }) {
         ))}
       </div>
 
-      {/* SOCIAL DOTS */}
-      <div
-        style={{
-          marginTop: "26px",
-          display: "flex",
-          justifyContent: "center",
-          gap: "14px",
-          color: "#D4AF37",
-          fontSize: "20px",
-        }}
-      >
-        <span>◎</span>
-        <span>◉</span>
-        <span>◌</span>
-      </div>
+      {/* SOCIAL ICONS */}
+<div
+  style={{
+    marginTop: "26px",
+    display: "flex",
+    justifyContent: "center",
+    gap: "18px",
+    fontSize: "22px",
+  }}
+>
+  <a
+    href="https://instagram.com/yourusername"
+    target="_blank"
+    rel="noreferrer"
+    style={{ color: "#D4AF37", textDecoration: "none" }}
+  >
+    📷
+  </a>
+
+  <a
+    href="https://linkedin.com/in/yourusername"
+    target="_blank"
+    rel="noreferrer"
+    style={{ color: "#D4AF37", textDecoration: "none" }}
+  >
+    💼
+  </a>
+
+  <a
+    href="https://github.com/yourusername"
+    target="_blank"
+    rel="noreferrer"
+    style={{ color: "#D4AF37", textDecoration: "none" }}
+  >
+    💻
+  </a>
+</div>
     </aside>
   );
 }
 
-export default Sidebar;
+export default Sidebar; 
