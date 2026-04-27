@@ -4,9 +4,16 @@ import Navbar from "./components/Navbar";
 import Sections from "./components/Sections";
 
 function App() {
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] =
+    useState("about");
+
   const [timeNow, setTimeNow] = useState("");
 
+  const [screenWidth, setScreenWidth] = useState(
+    window.innerWidth
+  );
+
+  /* LIVE CLOCK */
   useEffect(() => {
     const updateClock = () => {
       const now = new Date();
@@ -20,71 +27,124 @@ function App() {
     };
 
     updateClock();
+
     const timer = setInterval(updateClock, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
-  const isMobile = window.innerWidth < 768;
-  const isTablet = window.innerWidth < 1024;
+  /* RESPONSIVE LISTENER */
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    return () =>
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+  }, []);
+
+  const isMobile = screenWidth < 768;
+  const isTablet =
+    screenWidth >= 768 &&
+    screenWidth < 1100;
 
   return (
     <div
       style={{
         minHeight: "100vh",
         background:
-          "radial-gradient(circle at top right, rgba(255,215,0,0.06), transparent 30%), linear-gradient(135deg,#050505,#0b0b0b,#101010)",
+          "radial-gradient(circle at top right, rgba(212,175,55,0.08), transparent 28%), linear-gradient(135deg,#040404,#090909,#111111)",
         color: "#fff",
-        padding: isMobile ? "14px" : "30px",
-        fontFamily: "Inter, Poppins, sans-serif",
+        padding: isMobile
+          ? "12px"
+          : isTablet
+          ? "18px"
+          : "30px",
+        fontFamily:
+          "Inter, Poppins, sans-serif",
       }}
     >
-      {/* MASTER WRAPPER */}
+      {/* MAIN WRAPPER */}
       <div
         style={{
           maxWidth: "1650px",
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: isTablet ? "1fr" : "350px 1fr",
-          gap: isMobile ? "18px" : "28px",
+          gridTemplateColumns: isMobile
+            ? "1fr"
+            : isTablet
+            ? "1fr"
+            : "340px 1fr",
+          gap: isMobile
+            ? "14px"
+            : "26px",
           alignItems: "start",
         }}
       >
-        {/* SIDEBAR */}
+        {/* SIDEBAR / TOP CARD MOBILE */}
         <div
           style={{
-            animation: "fadeLeft 0.7s ease",
+            order: isMobile ? 1 : 0,
+            position: isMobile
+              ? "relative"
+              : "sticky",
+            top: isMobile ? "0" : "30px",
+            animation:
+              "fadeLeft 0.7s ease",
+            zIndex: 5,
           }}
         >
           <Sidebar timeNow={timeNow} />
         </div>
 
-        {/* MAIN PANEL */}
+        {/* RIGHT PANEL */}
         <div
           style={{
-            minHeight: "calc(100vh - 60px)",
+            order: isMobile ? 2 : 0,
+            minHeight: isMobile
+              ? "auto"
+              : "calc(100vh - 60px)",
             display: "flex",
             flexDirection: "column",
-            borderRadius: "34px",
+            borderRadius: isMobile
+              ? "24px"
+              : "34px",
             overflow: "hidden",
             background:
-              "linear-gradient(145deg,#111111,#0b0b0b)",
-            border: "1px solid rgba(255,215,0,0.06)",
+              "linear-gradient(145deg,#111,#0b0b0b)",
+            border:
+              "1px solid rgba(255,255,255,0.05)",
             boxShadow:
-              "0 18px 50px rgba(0,0,0,0.45), 0 0 28px rgba(255,215,0,0.04)",
-            animation: "fadeUp 0.75s ease",
-            backdropFilter: "blur(10px)",
+              "0 20px 55px rgba(0,0,0,0.45)",
+            animation:
+              "fadeUp 0.8s ease",
+            backdropFilter:
+              "blur(10px)",
           }}
         >
-          {/* TOP NAV BAR */}
+          {/* NAVBAR */}
           <div
             style={{
-              padding: isMobile ? "18px" : "24px 30px",
+              padding: isMobile
+                ? "14px 14px"
+                : isTablet
+                ? "18px 20px"
+                : "24px 30px",
               borderBottom:
-                "1px solid rgba(255,215,0,0.05)",
+                "1px solid rgba(255,255,255,0.04)",
               background:
-                "linear-gradient(180deg,#141414,#101010)",
-              position: "relative",
+                "linear-gradient(180deg,#151515,#101010)",
+              position: "sticky",
+              top: 0,
+              zIndex: 20,
             }}
           >
             {/* GOLD TOP LINE */}
@@ -96,41 +156,89 @@ function App() {
                 width: "100%",
                 height: "1px",
                 background:
-                  "linear-gradient(90deg,transparent,#ffd700,transparent)",
+                  "linear-gradient(90deg,transparent,#D4AF37,transparent)",
                 opacity: 0.55,
               }}
             />
 
             <Navbar
-              activeSection={activeSection}
-              setActiveSection={setActiveSection}
+              activeSection={
+                activeSection
+              }
+              setActiveSection={
+                setActiveSection
+              }
             />
           </div>
 
-          {/* CONTENT AREA */}
+          {/* CONTENT */}
           <div
             style={{
               flex: 1,
-              padding: isMobile ? "22px" : "36px",
+              padding: isMobile
+                ? "18px"
+                : isTablet
+                ? "24px"
+                : "38px",
               overflowY: "auto",
-              scrollBehavior: "smooth",
+              scrollBehavior:
+                "smooth",
             }}
           >
-            <Sections activeSection={activeSection} />
+            <Sections
+              activeSection={
+                activeSection
+              }
+            />
           </div>
         </div>
       </div>
 
-      {/* GLOBAL ANIMATIONS */}
+      {/* FLOATING MOBILE CTA */}
+      {isMobile && (
+        <a
+          href="https://wa.me/2347034828731"
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            position: "fixed",
+            right: "16px",
+            bottom: "18px",
+            zIndex: 100,
+            background:
+              "#25D366",
+            color: "#fff",
+            padding:
+              "14px 18px",
+            borderRadius:
+              "50px",
+            fontWeight: "800",
+            textDecoration:
+              "none",
+            boxShadow:
+              "0 12px 25px rgba(0,0,0,0.25)",
+            fontSize: "14px",
+          }}
+        >
+          WhatsApp
+        </a>
+      )}
+
+      {/* GLOBAL STYLE */}
       <style>{`
         *{
           box-sizing:border-box;
         }
 
-        body{
+        html,body,#root{
           margin:0;
           padding:0;
+          min-height:100%;
           background:#050505;
+        }
+
+        body{
+          overflow-x:hidden;
         }
 
         ::-webkit-scrollbar{
@@ -142,23 +250,12 @@ function App() {
         }
 
         ::-webkit-scrollbar-thumb{
-          background:#333;
+          background:#2c2c2c;
           border-radius:10px;
         }
 
         ::-webkit-scrollbar-thumb:hover{
-          background:#555;
-        }
-
-        @keyframes fadeCard{
-          from{
-            opacity:0;
-            transform:translateY(18px);
-          }
-          to{
-            opacity:1;
-            transform:translateY(0);
-          }
+          background:#444;
         }
 
         @keyframes fadeUp{
@@ -175,11 +272,17 @@ function App() {
         @keyframes fadeLeft{
           from{
             opacity:0;
-            transform:translateX(-25px);
+            transform:translateX(-30px);
           }
           to{
             opacity:1;
             transform:translateX(0);
+          }
+        }
+
+        @media (max-width:767px){
+          body{
+            -webkit-tap-highlight-color: transparent;
           }
         }
       `}</style>

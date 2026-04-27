@@ -1,7 +1,21 @@
 import React, { useState } from "react";
 
-function Navbar({ activeSection, setActiveSection }) {
-  const [hovered, setHovered] = useState("");
+function Navbar({
+  activeSection,
+  setActiveSection,
+}) {
+  const [hovered, setHovered] =
+    useState("");
+
+  const screenWidth =
+    window.innerWidth;
+
+  const isMobile =
+    screenWidth < 768;
+
+  const isTablet =
+    screenWidth >= 768 &&
+    screenWidth < 1100;
 
   const navItems = [
     "about",
@@ -14,66 +28,127 @@ function Navbar({ activeSection, setActiveSection }) {
   return (
     <header
       style={{
-        padding: "24px 34px",
-        borderBottom: "1px solid rgba(255,215,0,0.08)",
-        background:
-          "linear-gradient(180deg,#141414,#111)",
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
+        width: "100%",
       }}
     >
+      {/* NAV WRAPPER */}
       <div
         style={{
           display: "flex",
-gap: "14px",
-flexWrap: "nowrap",
-justifyContent: "center",
-alignItems: "center",
-overflowX: "auto",
+          gap: isMobile
+            ? "10px"
+            : "14px",
+          flexWrap: "nowrap",
+          justifyContent: isMobile
+            ? "flex-start"
+            : "center",
+          alignItems: "center",
+          overflowX: "auto",
+          paddingBottom:
+            isMobile ? "4px" : "0",
+          scrollbarWidth:
+            "none",
+          msOverflowStyle:
+            "none",
         }}
       >
         {navItems.map((item) => {
-          const active = activeSection === item;
-          const hover = hovered === item;
+          const active =
+            activeSection === item;
+
+          const hover =
+            hovered === item;
 
           return (
             <button
               key={item}
-              onClick={() => setActiveSection(item)}
-              onMouseEnter={() => setHovered(item)}
-              onMouseLeave={() => setHovered("")}
+              onClick={() =>
+                setActiveSection(
+                  item
+                )
+              }
+              onMouseEnter={() =>
+                setHovered(item)
+              }
+              onMouseLeave={() =>
+                setHovered("")
+              }
               style={{
-  border: "none",
-  cursor: "pointer",
-  padding: "16px 26px",
-  borderRadius: "16px",
-  fontSize: "16px",
-  textTransform: "capitalize",
-  fontWeight: active ? "700" : "500",
+                flexShrink: 0,
+                border: "none",
+                cursor: "pointer",
+                textTransform:
+                  "capitalize",
+                whiteSpace:
+                  "nowrap",
 
-  color: active ? "gold" : "#ffffff",
+                padding: isMobile
+                  ? "12px 18px"
+                  : isTablet
+                  ? "14px 22px"
+                  : "16px 26px",
 
-  background: active
-    ? "linear-gradient(135deg, rgba(255,215,0,0.22), rgba(255,215,0,0.08))"
-    : hover
-    ? "rgba(255,255,255,0.03)"
-    : "transparent",
+                borderRadius:
+                  isMobile
+                    ? "14px"
+                    : "18px",
 
-  border: "1px solid rgba(255,215,0,0.06)",
+                fontSize: isMobile
+                  ? "14px"
+                  : "16px",
 
-  boxShadow: active
-    ? "0 0 22px rgba(255,215,0,0.12)"
-    : "none",
+                fontWeight: active
+                  ? "800"
+                  : "600",
 
-  transition: "all 0.28s ease",
-}}
+                letterSpacing:
+                  "0.2px",
+
+                color: active
+                  ? "#D4AF37"
+                  : "#ffffff",
+
+                background:
+                  active
+                    ? "linear-gradient(135deg, rgba(212,175,55,0.18), rgba(212,175,55,0.06))"
+                    : hover
+                    ? "rgba(255,255,255,0.03)"
+                    : "transparent",
+
+                border: active
+                  ? "1px solid rgba(212,175,55,0.25)"
+                  : "1px solid rgba(255,255,255,0.05)",
+
+                boxShadow:
+                  active
+                    ? "0 10px 24px rgba(212,175,55,0.08)"
+                    : "none",
+
+                transition:
+                  "all 0.28s ease",
+              }}
             >
               {item}
             </button>
           );
         })}
       </div>
+
+      {/* MOBILE HINT */}
+      {isMobile && (
+        <div
+          style={{
+            marginTop: "8px",
+            textAlign: "center",
+            fontSize: "11px",
+            color: "#666",
+            letterSpacing:
+              "1px",
+          }}
+        >
+          Swipe menu →
+        </div>
+      )}
     </header>
   );
 }

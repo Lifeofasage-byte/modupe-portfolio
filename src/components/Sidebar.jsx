@@ -1,214 +1,293 @@
-import React from "react";
-import { goldBtn } from "../styles";
+import React, { useState, useEffect } from "react";
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
+import Sections from "./components/Sections";
 
-function Sidebar({ timeNow }) {
-  const infoItem = (icon, label, value) => (
-    <div
-      style={{
-        display: "flex",
-        gap: "14px",
-        alignItems: "flex-start",
-        marginBottom: "24px",
-      }}
-    >
-      <div
-        style={{
-          width: "42px",
-          height: "42px",
-          borderRadius: "12px",
-          background: "#141414",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "gold",
-          fontSize: "18px",
-          flexShrink: 0,
-        }}
-      >
-        {icon}
-      </div>
+function App() {
+  const [activeSection, setActiveSection] =
+    useState("about");
 
-      <div>
-        <div
-          style={{
-            fontSize: "13px",
-            color: "#888",
-            marginBottom: "4px",
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-          }}
-        >
-          {label}
-        </div>
+  const [timeNow, setTimeNow] = useState("");
 
-        <div
-          style={{
-            color: "#fff",
-            fontSize: "16px",
-            lineHeight: "1.5",
-          }}
-        >
-          {value}
-        </div>
-      </div>
-    </div>
+  const [screenWidth, setScreenWidth] = useState(
+    window.innerWidth
   );
 
+  /* LIVE CLOCK */
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+
+      setTimeNow(
+        now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      );
+    };
+
+    updateClock();
+
+    const timer = setInterval(updateClock, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  /* RESPONSIVE LISTENER */
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    return () =>
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+  }, []);
+
+  const isMobile = screenWidth < 768;
+  const isTablet =
+    screenWidth >= 768 &&
+    screenWidth < 1100;
+
   return (
-    <aside
-      style={{
-        background: "#111",
-        borderRadius: "30px",
-        border: "1px solid rgba(255,215,0,0.08)",
-        padding: "34px",
-        minHeight: "92vh",
-        position: "sticky",
-        top: "34px",
-        boxShadow: "0 0 30px rgba(255,215,0,0.05)",
-        width: "100%",
-      }}
-    >
-      <div style={{ color: "gold", fontSize: "24px", marginBottom: "26px" }}>
-        {timeNow}
-      </div>
-
-      <div style={{ textAlign: "center", marginBottom: "34px" }}>
-        <img
-          src="/profile.jpg"
-          alt="Profile"
-          style={{
-            width: "150px",
-            height: "150px",
-            borderRadius: "50%",
-            objectFit: "cover",
-            border: "3px solid gold",
-            marginBottom: "20px",
-          }}
-        />
-
-        <h2
-  style={{
-    fontSize: "40px",
-    marginBottom: "10px",
-    color: "#ffffff",
-    fontWeight: "800",
-    lineHeight: "1.1",
-    letterSpacing: "-0.5px",
-    textShadow: "0 2px 10px rgba(0,0,0,0.55)",
-  }}
->
-          Modupe S. O
-        </h2>
-
-        <p
-          style={{
-            color: "gold",
-            marginTop: "10px",
-            fontSize: "17px",
-          }}
-        >
-          Data & BI Consultant
-        </p>
-      </div>
-
-      <a
-        href="/Modupe_CV.pdf"
-        download
-        style={goldBtn}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.transform = "translateY(-4px)";
-    e.currentTarget.style.boxShadow =
-      "0 18px 40px rgba(255,215,0,0.28)";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.transform = "translateY(0px)";
-    e.currentTarget.style.boxShadow =
-      "0 10px 24px rgba(255,215,0,0.14)";
-  }}
->
-  Download CV
-</a>
-
-      <div
-  style={{
-    marginTop: "34px",
-    display: "grid",
-    gap: "18px",
-  }}
->
-  {[
-    ["EMAIL", "hiremodupe@gmail.com", "✉"],
-    ["PHONE", "+234 703 482 8731", "☎"],
-    ["LOCATION", "Lagos, Nigeria", "⌂"],
-    ["FOCUS", "Power BI • Excel • SQL", "◉"],
-  ].map((item, index) => (
     <div
-      key={index}
       style={{
-        display: "grid",
-        gridTemplateColumns: "48px 1fr",
-        gap: "16px",
-        alignItems: "center",
+        minHeight: "100vh",
+        background:
+          "radial-gradient(circle at top right, rgba(212,175,55,0.08), transparent 28%), linear-gradient(135deg,#040404,#090909,#111111)",
+        color: "#fff",
+        padding: isMobile
+          ? "12px"
+          : isTablet
+          ? "18px"
+          : "30px",
+        fontFamily:
+          "Inter, Poppins, sans-serif",
       }}
     >
+      {/* MAIN WRAPPER */}
       <div
         style={{
-          width: "48px",
-          height: "48px",
-          borderRadius: "14px",
-          background: "#0f0f0f",
-          border: "1px solid rgba(255,215,0,0.05)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "gold",
-          fontSize: "18px",
+          maxWidth: "1650px",
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: isMobile
+            ? "1fr"
+            : isTablet
+            ? "1fr"
+            : "340px 1fr",
+          gap: isMobile
+            ? "14px"
+            : "26px",
+          alignItems: "start",
         }}
       >
-        {item[2]}
-      </div>
-
-      <div>
+        {/* SIDEBAR / TOP CARD MOBILE */}
         <div
           style={{
-            fontSize: "13px",
-            color: "#7f7f7f",
-            letterSpacing: "1px",
-            marginBottom: "4px",
+            order: isMobile ? 1 : 0,
+            position: isMobile
+              ? "relative"
+              : "sticky",
+            top: isMobile ? "0" : "30px",
+            animation:
+              "fadeLeft 0.7s ease",
+            zIndex: 5,
           }}
         >
-          {item[0]}
+          <Sidebar timeNow={timeNow} />
         </div>
 
+        {/* RIGHT PANEL */}
         <div
           style={{
-            color: "#ffffff",
-            fontSize: "16px",
-            fontWeight: "500",
+            order: isMobile ? 2 : 0,
+            minHeight: isMobile
+              ? "auto"
+              : "calc(100vh - 60px)",
+            display: "flex",
+            flexDirection: "column",
+            borderRadius: isMobile
+              ? "24px"
+              : "34px",
+            overflow: "hidden",
+            background:
+              "linear-gradient(145deg,#111,#0b0b0b)",
+            border:
+              "1px solid rgba(255,255,255,0.05)",
+            boxShadow:
+              "0 20px 55px rgba(0,0,0,0.45)",
+            animation:
+              "fadeUp 0.8s ease",
+            backdropFilter:
+              "blur(10px)",
           }}
         >
-          {item[1]}
+          {/* NAVBAR */}
+          <div
+            style={{
+              padding: isMobile
+                ? "14px 14px"
+                : isTablet
+                ? "18px 20px"
+                : "24px 30px",
+              borderBottom:
+                "1px solid rgba(255,255,255,0.04)",
+              background:
+                "linear-gradient(180deg,#151515,#101010)",
+              position: "sticky",
+              top: 0,
+              zIndex: 20,
+            }}
+          >
+            {/* GOLD TOP LINE */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "1px",
+                background:
+                  "linear-gradient(90deg,transparent,#D4AF37,transparent)",
+                opacity: 0.55,
+              }}
+            />
+
+            <Navbar
+              activeSection={
+                activeSection
+              }
+              setActiveSection={
+                setActiveSection
+              }
+            />
+          </div>
+
+          {/* CONTENT */}
+          <div
+            style={{
+              flex: 1,
+              padding: isMobile
+                ? "18px"
+                : isTablet
+                ? "24px"
+                : "38px",
+              overflowY: "auto",
+              scrollBehavior:
+                "smooth",
+            }}
+          >
+            <Sections
+              activeSection={
+                activeSection
+              }
+            />
+          </div>
         </div>
       </div>
+
+      {/* FLOATING MOBILE CTA */}
+      {isMobile && (
+        <a
+          href="https://wa.me/2347034828731"
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            position: "fixed",
+            right: "16px",
+            bottom: "18px",
+            zIndex: 100,
+            background:
+              "#25D366",
+            color: "#fff",
+            padding:
+              "14px 18px",
+            borderRadius:
+              "50px",
+            fontWeight: "800",
+            textDecoration:
+              "none",
+            boxShadow:
+              "0 12px 25px rgba(0,0,0,0.25)",
+            fontSize: "14px",
+          }}
+        >
+          WhatsApp
+        </a>
+      )}
+
+      {/* GLOBAL STYLE */}
+      <style>{`
+        *{
+          box-sizing:border-box;
+        }
+
+        html,body,#root{
+          margin:0;
+          padding:0;
+          min-height:100%;
+          background:#050505;
+        }
+
+        body{
+          overflow-x:hidden;
+        }
+
+        ::-webkit-scrollbar{
+          width:8px;
+        }
+
+        ::-webkit-scrollbar-track{
+          background:#0b0b0b;
+        }
+
+        ::-webkit-scrollbar-thumb{
+          background:#2c2c2c;
+          border-radius:10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover{
+          background:#444;
+        }
+
+        @keyframes fadeUp{
+          from{
+            opacity:0;
+            transform:translateY(30px);
+          }
+          to{
+            opacity:1;
+            transform:translateY(0);
+          }
+        }
+
+        @keyframes fadeLeft{
+          from{
+            opacity:0;
+            transform:translateX(-30px);
+          }
+          to{
+            opacity:1;
+            transform:translateX(0);
+          }
+        }
+
+        @media (max-width:767px){
+          body{
+            -webkit-tap-highlight-color: transparent;
+          }
+        }
+      `}</style>
     </div>
-  ))}
-</div>
-<div
-  style={{
-    marginTop: "28px",
-    display: "flex",
-    justifyContent: "center",
-    gap: "16px",
-    color: "gold",
-    fontSize: "22px",
-  }}
->
-  <span>◎</span>
-  <span>◉</span>
-  <span>◌</span>
-</div>
-    </aside>
   );
 }
 
-export default Sidebar;
+export default App;
