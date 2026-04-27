@@ -1,10 +1,10 @@
 import React from "react";
 
-import AboutSection from "../AboutSection.jsx";
-import ResumeSection from "../ResumeSection.jsx";
-import PortfolioSection from "../PortfolioSection.jsx";
-import BlogSection from "../BlogSection.jsx";
-import ContactSection from "../ContactSection.jsx";
+import AboutSection from "./AboutSection";
+import ResumeSection from "./ResumeSection";
+import PortfolioSection from "./PortfolioSection";
+import BlogSection from "./BlogSection";
+import ContactSection from "./ContactSection";
 
 function Sections({ activeSection }) {
   switch (activeSection) {

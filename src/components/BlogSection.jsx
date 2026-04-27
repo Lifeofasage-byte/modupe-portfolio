@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { blogPosts } from "./data";
+import { blogPosts } from "../data";
 
 function BlogSection() {
   const [screenWidth, setScreenWidth] = useState(
