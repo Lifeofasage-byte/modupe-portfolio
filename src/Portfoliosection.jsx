@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function Portfoliosection() {
+function PortfolioSection() {
   const [portfolioTab, setPortfolioTab] = useState("All");
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  const screenWidth = window.innerWidth;
+  /* LIVE RESPONSIVE WIDTH */
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () =>
+      window.removeEventListener("resize", handleResize);
+  }, []);
+
   const isMobile = screenWidth < 768;
-  const isTablet = screenWidth >= 768 && screenWidth < 1100;
+  const isTablet =
+    screenWidth >= 768 && screenWidth < 1100;
 
   const portfolioItems = [
     /* DASHBOARDS */
@@ -82,10 +95,14 @@ function Portfoliosection() {
       {/* HERO */}
       <div
         style={{
-          background: "linear-gradient(145deg,#0b0b0b,#111)",
-          border: "1px solid rgba(255,255,255,0.05)",
+          background:
+            "linear-gradient(145deg,#0b0b0b,#111)",
+          border:
+            "1px solid rgba(255,255,255,0.05)",
           borderRadius: "28px",
-          padding: isMobile ? "32px 20px" : "55px 40px",
+          padding: isMobile
+            ? "32px 20px"
+            : "55px 40px",
           textAlign: "center",
         }}
       >
@@ -122,12 +139,15 @@ function Portfoliosection() {
             color: "#9e9e9e",
             maxWidth: "780px",
             margin: "0 auto",
-            fontSize: isMobile ? "16px" : "20px",
+            fontSize: isMobile
+              ? "16px"
+              : "20px",
             lineHeight: "1.7",
           }}
         >
-          Dashboards, branding systems and strategic visuals
-          designed to help businesses scale with clarity.
+          Dashboards, branding systems and
+          strategic visuals designed to help
+          businesses scale with clarity.
         </p>
       </div>
 
@@ -193,7 +213,9 @@ function Portfoliosection() {
             href={item.link}
             target="_blank"
             rel="noreferrer"
-            style={{ textDecoration: "none" }}
+            style={{
+              textDecoration: "none",
+            }}
           >
             <div
               style={{
@@ -212,7 +234,9 @@ function Portfoliosection() {
                 alt={item.title}
                 style={{
                   width: "100%",
-                  height: isMobile ? "220px" : "260px",
+                  height: isMobile
+                    ? "220px"
+                    : "260px",
                   objectFit: "cover",
                 }}
               />
@@ -259,4 +283,4 @@ function Portfoliosection() {
   );
 }
 
-export default Portfoliosection;
+export default PortfolioSection;

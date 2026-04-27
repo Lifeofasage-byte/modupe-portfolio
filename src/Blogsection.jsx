@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { blogPosts } from "./data";
 
-function Blogsection() {
-  const isMobile = window.innerWidth < 768;
+function BlogSection() {
+  const [screenWidth, setScreenWidth] = useState(
+    window.innerWidth
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () =>
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+  }, []);
+
+  const isMobile = screenWidth < 768;
 
   return (
     <div
@@ -15,10 +33,14 @@ function Blogsection() {
       {/* HERO */}
       <div
         style={{
-          background: "linear-gradient(145deg,#0b0b0b,#111)",
-          border: "1px solid rgba(255,255,255,0.05)",
+          background:
+            "linear-gradient(145deg,#0b0b0b,#111)",
+          border:
+            "1px solid rgba(255,255,255,0.05)",
           borderRadius: "28px",
-          padding: isMobile ? "30px 20px" : "55px 40px",
+          padding: isMobile
+            ? "30px 20px"
+            : "55px 40px",
           textAlign: "center",
         }}
       >
@@ -37,7 +59,9 @@ function Blogsection() {
         <h1
           style={{
             color: "#fff",
-            fontSize: isMobile ? "40px" : "72px",
+            fontSize: isMobile
+              ? "40px"
+              : "72px",
             fontWeight: "900",
             marginBottom: "16px",
             lineHeight: "1",
@@ -49,14 +73,17 @@ function Blogsection() {
         <p
           style={{
             color: "#9e9e9e",
-            fontSize: isMobile ? "16px" : "20px",
+            fontSize: isMobile
+              ? "16px"
+              : "20px",
             maxWidth: "760px",
             margin: "0 auto",
             lineHeight: "1.7",
           }}
         >
-          Practical thoughts on dashboards, business intelligence,
-          reporting systems and modern growth strategy.
+          Practical thoughts on dashboards,
+          business intelligence, reporting
+          systems and modern growth strategy.
         </p>
       </div>
 
@@ -92,7 +119,8 @@ function Blogsection() {
             onMouseLeave={(e) => {
               e.currentTarget.style.transform =
                 "translateY(0px)";
-              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.boxShadow =
+                "none";
             }}
           >
             {/* IMAGE */}
@@ -149,4 +177,4 @@ function Blogsection() {
   );
 }
 
-export default Blogsection;
+export default BlogSection;

@@ -2,7 +2,7 @@ import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-function Contactsection() {
+function ContactSection() {
   const isMobile = window.innerWidth < 768;
 
   const cardStyle = {
@@ -195,4 +195,4 @@ function Contactsection() {
   );
 }
 
-export default Contactsection;
+export default ContactSection;

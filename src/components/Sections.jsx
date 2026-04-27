@@ -1,33 +1,28 @@
 import React from "react";
 
-import Aboutsection from "../Aboutsection";
-import Resumesection from "../Resumesection";
-import Portfoliosection from "../Portfoliosection";
-import Blogsection from "../Blogsection";
-import Contactsection from "../Contactsection";
+import AboutSection from "../AboutSection";
+import ResumeSection from "../ResumeSection";
+import PortfolioSection from "../PortfolioSection";
+import BlogSection from "../BlogSection";
+import ContactSection from "../ContactSection";
 
 function Sections({ activeSection }) {
-  if (activeSection === "about") {
-    return <Aboutsection />;
-  }
+  switch (activeSection) {
+    case "resume":
+      return <ResumeSection />;
 
-  if (activeSection === "resume") {
-    return <Resumesection />;
-  }
+    case "portfolio":
+      return <PortfolioSection />;
 
-  if (activeSection === "portfolio") {
-    return <Portfoliosection />;
-  }
+    case "blog":
+      return <BlogSection />;
 
-  if (activeSection === "blog") {
-    return <Blogsection />;
-  }
+    case "contact":
+      return <ContactSection />;
 
-  if (activeSection === "contact") {
-    return <Contactsection />;
+    default:
+      return <AboutSection />;
   }
-
-  return <Aboutsection />;
 }
 
 export default Sections;
