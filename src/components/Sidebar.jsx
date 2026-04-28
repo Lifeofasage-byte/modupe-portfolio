@@ -166,14 +166,21 @@ function Sidebar({ timeNow }) {
   }}
 >
   <a
-    href="https://instagram.com/Weizsage"
-    target="_blank"
-    rel="noreferrer"
-    style={{ color: "#D4AF37", textDecoration: "none" }}
-    title="Instagram"
-  >
-    📷
-  </a>
+  href="https://instagram.com/Weizsage"
+  target="_blank"
+  rel="noreferrer"
+  title="Instagram"
+>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+    alt="Instagram"
+    style={{
+      width: "22px",
+      height: "22px",
+      borderRadius: "6px",
+    }}
+  />
+</a>
 
   <a
     href="mailto:hiremodupe@gmail.com"
