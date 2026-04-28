@@ -166,28 +166,29 @@ function Sidebar({ timeNow }) {
   }}
 >
   <a
-    href="https://instagram.com/yourusername"
+    href="https://instagram.com/Weizsage"
     target="_blank"
     rel="noreferrer"
     style={{ color: "#D4AF37", textDecoration: "none" }}
+    title="Instagram"
   >
     📷
   </a>
 
   <a
-    href="https://linkedin.com/in/yourusername"
-    target="_blank"
-    rel="noreferrer"
+    href="mailto:hiremodupe@gmail.com"
     style={{ color: "#D4AF37", textDecoration: "none" }}
+    title="Email"
   >
-    💼
+    ✉
   </a>
 
   <a
-    href="https://github.com/yourusername"
+    href="https://github.com/Lifeofasage-byte"
     target="_blank"
     rel="noreferrer"
     style={{ color: "#D4AF37", textDecoration: "none" }}
+    title="GitHub"
   >
     💻
   </a>
