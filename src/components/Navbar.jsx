@@ -63,9 +63,7 @@ function Navbar({
             <button
               key={item}
               onClick={() =>
-                setActiveSection(
-                  item
-                )
+                setActiveSection(item)
               }
               onMouseEnter={() =>
                 setHovered(item)
@@ -81,6 +79,7 @@ function Navbar({
                   "capitalize",
                 whiteSpace:
                   "nowrap",
+                outline: "none",
 
                 padding: isMobile
                   ? "12px 18px"
@@ -110,22 +109,32 @@ function Navbar({
 
                 background:
                   active
-                    ? "linear-gradient(135deg, rgba(212,175,55,0.18), rgba(212,175,55,0.06))"
+                    ? "linear-gradient(135deg, rgba(212,175,55,0.22), rgba(212,175,55,0.07))"
                     : hover
-                    ? "rgba(255,255,255,0.03)"
+                    ? "rgba(255,255,255,0.04)"
                     : "transparent",
 
                 border: active
-                  ? "1px solid rgba(212,175,55,0.25)"
+                  ? "1px solid rgba(212,175,55,0.28)"
+                  : hover
+                  ? "1px solid rgba(255,255,255,0.08)"
                   : "1px solid rgba(255,255,255,0.05)",
 
-                boxShadow:
-                  active
-                    ? "0 10px 24px rgba(212,175,55,0.08)"
-                    : "none",
+                boxShadow: active
+                  ? "0 12px 28px rgba(212,175,55,0.14)"
+                  : hover
+                  ? "0 8px 20px rgba(0,0,0,0.25)"
+                  : "none",
+
+                transform: hover
+                  ? "translateY(-3px)"
+                  : "translateY(0)",
 
                 transition:
                   "all 0.28s ease",
+
+                WebkitTapHighlightColor:
+                  "transparent",
               }}
             >
               {item}
