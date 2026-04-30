@@ -21,6 +21,7 @@ function Navbar({
     "about",
     "resume",
     "portfolio",
+    "testimonials",
     "blog",
     "contact",
   ];
@@ -31,7 +32,6 @@ function Navbar({
         width: "100%",
       }}
     >
-      {/* NAV WRAPPER */}
       <div
         style={{
           display: "flex",
@@ -143,7 +143,6 @@ function Navbar({
         })}
       </div>
 
-      {/* MOBILE HINT */}
       {isMobile && (
         <div
           style={{
